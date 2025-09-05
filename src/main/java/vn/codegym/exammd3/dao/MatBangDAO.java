@@ -3,7 +3,6 @@ package vn.codegym.exammd3.dao;
 import vn.codegym.exammd3.model.MatBang;
 
 import java.sql.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,44 +41,10 @@ public class MatBangDAO {
         }
     }
 
-    public List<MatBang> getAll() throws SQLException {
-        List<MatBang> list = new ArrayList<>();
-        String sql = "SELECT * FROM MatBang";
-        try (Connection conn = getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                list.add(new MatBang(
-                        rs.getString("maMatBang"),
-                        rs.getString("trangThai"),
-                        rs.getDouble("dienTich"),
-                        rs.getInt("tang"),
-                        rs.getString("loaiMatBang"),
-                        rs.getDouble("giaTien"),
-                        rs.getDate("ngayBatDau").toLocalDate(),
-                        rs.getDate("ngayKetThuc").toLocalDate()
-                ));
-            }
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-        return list;
-    }
+
     public List<MatBang> search(String loaiMatBang, Double giaTien, Integer tang) throws SQLException {
         List<MatBang> list = new ArrayList<>();
-        StringBuilder sql = new StringBuilder("SELECT * FROM MatBang WHERE 1=1");
-
-        // Chỉ thêm điều kiện nếu người dùng nhập
-        if (loaiMatBang != null && !loaiMatBang.isEmpty()) {
-            sql.append(" AND loaiMatBang = ?");
-        }
-        if (giaTien != null) {
-            sql.append(" AND giaTien BETWEEN ? AND ?");
-        }
-        if (tang != null) {
-            sql.append(" AND tang = ?");
-        }
-
-        sql.append(" ORDER BY dienTich ASC"); // sắp xếp tăng dần theo diện tích
+        StringBuilder sql = getStringBuilder(loaiMatBang, giaTien, tang);
 
         try (Connection conn = getConnection();
              PreparedStatement ps = conn.prepareStatement(sql.toString())) {
@@ -94,7 +59,6 @@ public class MatBangDAO {
 
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                // Lấy LocalDate từ java.sql.Date
                 java.sql.Date dbNgayBatDau = rs.getDate("ngayBatDau");
                 java.sql.Date dbNgayKetThuc = rs.getDate("ngayKetThuc");
 
@@ -115,6 +79,24 @@ public class MatBangDAO {
 
         return list;
     }
+
+    private static StringBuilder getStringBuilder(String loaiMatBang, Double giaTien, Integer tang) {
+        StringBuilder sql = new StringBuilder("SELECT * FROM MatBang WHERE 1=1");
+
+        if (loaiMatBang != null && !loaiMatBang.isEmpty()) {
+            sql.append(" AND loaiMatBang = ?");
+        }
+        if (giaTien != null) {
+            sql.append(" AND giaTien BETWEEN ? AND ?");
+        }
+        if (tang != null) {
+            sql.append(" AND tang = ?");
+        }
+
+        sql.append(" ORDER BY dienTich ASC");
+        return sql;
+    }
+
     public void delete(String maMatBang) throws SQLException {
         String sql = "DELETE FROM MatBang WHERE maMatBang = ?";
         try (Connection conn = getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {

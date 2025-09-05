@@ -9,7 +9,7 @@ import java.io.IOException;
 
 @WebServlet("/deleteMatBang")
 public class DeleteMatBangServlet extends HttpServlet {
-    private MatBangDAO dao = new MatBangDAO();
+    private final MatBangDAO dao = new MatBangDAO();
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

@@ -5,12 +5,31 @@
     <title>Danh sách Mặt Bằng - TComplex</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        body { padding: 20px; background-color: #f8f9fa; }
-        .table th, .table td { vertical-align: middle; }
-        .form-select, .form-control { max-width: 200px; }
-        .search-form { margin-bottom: 30px; }
-        .table thead { background-color: #0d6efd; color: white; }
-        .table-striped > tbody > tr:nth-of-type(odd) { background-color: #e9f2ff; }
+        body {
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+
+        .table th, .table td {
+            vertical-align: middle;
+        }
+
+        .form-select, .form-control {
+            max-width: 200px;
+        }
+
+        .search-form {
+            margin-bottom: 30px;
+        }
+
+        .table thead {
+            background-color: #0d6efd;
+            color: white;
+        }
+
+        .table-striped > tbody > tr:nth-of-type(odd) {
+            background-color: #e9f2ff;
+        }
     </style>
 </head>
 <body>
@@ -21,8 +40,12 @@
         <label class="form-label">Loại mặt bằng</label>
         <select name="loaiMatBang" class="form-select">
             <option value="">-- Tất cả --</option>
-            <option value="Văn phòng chia sẻ" ${param.loaiMatBang=='Văn phòng chia sẻ'?'selected':''}>Văn phòng chia sẻ</option>
-            <option value="Văn phòng trọn gói" ${param.loaiMatBang=='Văn phòng trọn gói'?'selected':''}>Văn phòng trọn gói</option>
+            <option value="Văn phòng chia sẻ" ${param.loaiMatBang=='Văn phòng chia sẻ'?'selected':''}>Văn phòng chia
+                sẻ
+            </option>
+            <option value="Văn phòng trọn gói" ${param.loaiMatBang=='Văn phòng trọn gói'?'selected':''}>Văn phòng trọn
+                gói
+            </option>
         </select>
     </div>
     <div class="col-auto">

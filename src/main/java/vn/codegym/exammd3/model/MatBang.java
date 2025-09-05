@@ -91,13 +91,6 @@ public class MatBang {
     public void setNgayKetThuc(LocalDate ngayKetThuc) {
         this.ngayKetThuc = ngayKetThuc;
     }
-    public String getNgayBatDauStr() {
-        return ngayBatDau != null ? ngayBatDau.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) : "";
-    }
-
-    public String getNgayKetThucStr() {
-        return ngayKetThuc != null ? ngayKetThuc.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) : "";
-    }
 
 
 }

@@ -14,7 +14,7 @@ import java.time.temporal.ChronoUnit;
 
 @WebServlet("/addMatBang")
 public class AddMatBangServlet extends HttpServlet {
-    private MatBangDAO dao = new MatBangDAO();
+    private final MatBangDAO dao = new MatBangDAO();
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

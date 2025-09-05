@@ -13,7 +13,7 @@ import java.util.List;
 
 @WebServlet("/listMatBang")
 public class ListMatBangServlet extends HttpServlet {
-    private MatBangDAO dao = new MatBangDAO();
+    private final MatBangDAO dao = new MatBangDAO();
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
